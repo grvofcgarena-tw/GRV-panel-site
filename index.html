@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="GRV JavaScript 音訊工具：yt-dlp、FFmpeg、Discord Voice 與 E2EE 整合的開源技術文件。">
+  <title>GRV JavaScript 音訊工具</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="shell nav-wrap">
+      <a class="brand" href="#top" aria-label="GRV JavaScript 首頁"><span>GRV</span><small>.js</small></a>
+      <nav aria-label="主要導覽">
+        <a href="#overview">概覽</a>
+        <a href="#architecture">架構</a>
+        <a href="#security">安全性</a>
+        <a href="#docs">文件</a>
+        <a class="nav-cta" href="https://github.com/grvofcgarena-tw/GRV-panel" target="_blank" rel="noreferrer">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow">JAVASCRIPT · DISCORD VOICE · AUDIO TOOLING</p>
+        <h1>把即時音訊工具<br><em>做成可理解的 JavaScript。</em></h1>
+        <p class="lead">GRV 是一套以 Node.js 為核心的 Discord 音訊工具實作，示範 yt-dlp、FFmpeg、@discordjs/voice、PCM mixing、語音 AI 與 E2EE voice transport 如何協同運作。</p>
+        <div class="actions">
+          <a class="button primary" href="#architecture">查看技術架構</a>
+          <a class="button secondary" href="https://github.com/grvofcgarena-tw/GRV-panel" target="_blank" rel="noreferrer">閱讀原始碼</a>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="技術摘要">
+        <div class="terminal-bar"><i></i><i></i><i></i><span>grv-audio.js</span></div>
+        <pre><code><b>const</b> pipeline = <b>new</b> AudioPipeline({
+  source: <span>'yt-dlp'</span>,
+  decoder: <span>'ffmpeg'</span>,
+  transport: <span>'discord-voice'</span>,
+  encryption: <span>'dave/e2ee'</span>
+});
+
+<b>await</b> pipeline.play(track);</code></pre>
+      </div>
+    </section>
+
+    <section id="overview" class="section shell">
+      <div class="section-heading"><p class="eyebrow">WHY IT EXISTS</p><h2>一個可拆解、可測試的音訊管線</h2></div>
+      <div class="feature-grid">
+        <article class="feature"><span class="number">01</span><h3>直接串流</h3><p>以 yt-dlp 取得合法公開影音來源的音訊 URL，交由 FFmpeg 解碼為 48 kHz stereo PCM，再交給 Discord Voice。</p></article>
+        <article class="feature"><span class="number">02</span><h3>平滑混音</h3><p>PCM mixer 以 20 ms frame 混合音樂與語音，透過 ducking gain 讓語音回覆期間音樂降低，結束後平滑恢復。</p></article>
+        <article class="feature"><span class="number">03</span><h3>可觀測狀態</h3><p>播放世代、串流位置、格式、位元率與結束原因都以結構化事件記錄，協助診斷中斷與競態。</p></article>
+      </div>
+    </section>
+
+    <section id="architecture" class="section dark-section">
+      <div class="shell">
+        <div class="section-heading light"><p class="eyebrow">ARCHITECTURE</p><h2>從搜尋到 Discord Voice</h2></div>
+        <div class="flow" role="list">
+          <div class="flow-step" role="listitem"><b>01</b><strong>Query</strong><span>即時搜尋與 autocomplete</span></div><div class="arrow">→</div>
+          <div class="flow-step" role="listitem"><b>02</b><strong>yt-dlp</strong><span>選擇音訊串流</span></div><div class="arrow">→</div>
+          <div class="flow-step" role="listitem"><b>03</b><strong>FFmpeg</strong><span>解碼與 PCM frame</span></div><div class="arrow">→</div>
+          <div class="flow-step" role="listitem"><b>04</b><strong>Voice</strong><span>DAVE／E2EE 傳輸</span></div>
+        </div>
+        <div class="code-note"><span>設計原則</span><code>one track · one generation · one terminal event</code></div>
+      </div>
+    </section>
+
+    <section id="security" class="section shell split-section">
+      <div class="section-heading"><p class="eyebrow">SECURITY BY DEFAULT</p><h2>安全性不是額外功能</h2></div>
+      <div class="security-copy"><p>公開頁面只包含技術說明與開源入口，不包含任何登入狀態、資料庫、Token、cookies、憑證私鑰或生產環境設定。私有管理面板與機器人執行環境保持分離。</p><div class="checks"><span>✓ 無自動外部跳轉</span><span>✓ 不收集帳號資料</span><span>✓ E2EE voice 相容設計</span><span>✓ 可檢查的 Node.js 事件流</span></div></div>
+    </section>
+
+    <section id="docs" class="section docs-section">
+      <div class="shell docs-grid"><div><p class="eyebrow">DOCUMENTATION</p><h2>從這裡開始</h2><p>查看 repository 中的公開文件，了解本專案如何配置 Node.js、yt-dlp、FFmpeg 與 Discord Voice。請依照各服務的使用條款使用音訊來源。</p></div><div class="doc-links"><a href="https://github.com/grvofcgarena-tw/GRV-panel#readme" target="_blank" rel="noreferrer"><span>README</span><b>→</b></a><a href="https://github.com/grvofcgarena-tw/GRV-panel/tree/main/nodeapp/bot/music" target="_blank" rel="noreferrer"><span>Music source</span><b>→</b></a><a href="https://github.com/grvofcgarena-tw/GRV-panel/issues" target="_blank" rel="noreferrer"><span>Issues & discussion</span><b>→</b></a></div></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><div class="shell footer-wrap"><span>GRV JavaScript 音訊工具</span><span>Built with Node.js · Open technical documentation</span></div></footer>
+</body>
+</html>

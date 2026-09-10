@@ -1,0 +1,26 @@
+# Secrets and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*token*
+*secret*
+*credential*
+*password*
+*cookie*
+*session*
+
+# Production data and logs
+*.db
+*.db-*
+data/
+logs/
+*.log
+
+# Local tooling
+node_modules/
+.DS_Store
+.runtime/
