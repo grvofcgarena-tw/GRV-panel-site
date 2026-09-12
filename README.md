@@ -1,6 +1,6 @@
 # GRV JavaScript Audio Tools
 
-`grv-panel.js.org` is the public technical documentation site for GRV's JavaScript-based Discord audio tooling. It explains the integration of Node.js, yt-dlp, FFmpeg, `@discordjs/voice`, PCM mixing, speech tooling, and DAVE/E2EE voice transport.
+`grvffws.js.org` is the public technical documentation site for GRV's JavaScript-based Discord audio tooling. It explains the integration of Node.js, yt-dlp, FFmpeg, `@discordjs/voice`, PCM mixing, speech tooling, and DAVE/E2EE voice transport.
 
 This repository is intentionally a static GitHub Pages site. It contains no login form, database, bot token, cookies, production configuration, credentials, private certificates, or private management-panel code. The private GRV-panel application remains in its separate repository and deployment environment.
 
@@ -10,7 +10,7 @@ The public site documents a JavaScript audio pipeline and links to the source pr
 
 ## GitHub Pages
 
-The `main` branch is deployed by `.github/workflows/pages.yml`. The `CNAME` file contains `grv-panel.js.org`. After GitHub Pages is enabled for this repository, configure `grv-panel.js.org` as the Pages custom domain if GitHub asks for it.
+The `main` branch is deployed by `.github/workflows/pages.yml`. The `CNAME` file contains `grvffws.js.org`. After GitHub Pages is enabled for this repository, configure `grvffws.js.org` as the Pages custom domain if GitHub asks for it.
 
 ## Local preview
 
@@ -44,7 +44,7 @@ In a second native Termux session, configure the existing Cloudflare Tunnel with
 
 ```bash
 cd "$HOME/GRV-panel-site"
-export TUNNEL_DOMAIN='grv-panel.js.org'
+export TUNNEL_DOMAIN='grvffws.js.org'
 export CLOUDFLARED_TUNNEL_NAME='your-tunnel-name-or-uuid'
 export CLOUDFLARED_TUNNEL_TOKEN="$(cat "$HOME/.cloudflared/grv-tunnel.token")"
 ./scripts/start-local-tunnel.sh
